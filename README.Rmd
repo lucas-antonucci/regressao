@@ -18,37 +18,36 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of regressao is to ...
+A função foi criada para realizar uma regressão linear. Automatiza o processo de calcular coeficientes, resíduos, valores preditos dentro do conjunto de dados e predições para novos valores, além de gerar gráficos. Abaixo temos uma explicação do por que usar uma função desse tipo e o que ela faz:
 
-## Installation
+A função calcula os coeficientes da regressão linear, que indicam a relação entre as variáveis independentes ($X_i$) e a variável dependente ($Y$), ou seja, o quanto as variáveis independentes influenciam a variável dependente, analisando sua força e direção. Os coeficientes ($\beta_i$, i = 1,...,i) mostra quanto a variável $Y$ muda para cada unidade de mudança em $X_i$ mantendo todas as outras variáveis independentes constantes, enquanto o coeficiente de intercepto ($\beta_0$) indica o valor de Y quando $X_i$, i = 0,...,i, são zero.
 
-You can install the development version of regressao like so:
+Após o ajuste do modelo, a função calcula os resíduos, que são as diferenças entre os valores observados e os valores preditos. Resíduos pequenos indicam que o modelo está ajustado adequadamente aos dados, caso sejam valores muito grandes temos a sugestão que o modelo não esta bem ajustado ao conjunto de dados.
+
+A função gera os valores preditos para o mesmo conjunto de dados usado no ajuste. Permitindo a comparação dos valores preditos com os valores reais observados e posterior analise para verificar se o modelo está capturando corretamente a relação entre as variáveis ou se há desvios significativos.
+
+Além disso, é possível inserir novos valores para $X_i$ e obter previsões para $Y$ com base no modelo ajustado. Isso é extremamente importante para conseguir realizar previsões futuras.
+
+Por fim, a função gera gráficos, como o gráfico de valores preditos vs valores observados. Um gráfico de resíduos também pode ser gerado para analisar visualmente o desempenho do modelo. Os gráficos oferecem uma forma rápida de visualizar a qualidade do modelo e identificar possíveis problemas.
+
+## Instalação
+
+A instalação do pacote é feita da seguinte forma
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+devtools::install_github("lucas-antonucci/regressao")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
 ```{r example}
 library(regressao)
-## basic example code
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
 ```{r cars}
-summary(cars)
+data(mtcars)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r}
+reg <- regressao_linear(mpg ~ wt + hp, data = mtcars)
 ```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
